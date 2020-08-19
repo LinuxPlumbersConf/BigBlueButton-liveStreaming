@@ -1,11 +1,11 @@
-ARG FFMPEG_VERSION=4.2.2
+ARG FFMPEG_VERSION=4.2.4
 
-FROM ubuntu:bionic
+FROM ubuntu:focal
 ARG FFMPEG_VERSION
 
 WORKDIR /usr/src/app
 
-RUN apt-get update && apt-get install -y software-properties-common && apt-get update && add-apt-repository ppa:jonathonf/ffmpeg-4
+RUN apt-get update && apt-get install -y software-properties-common && apt-get update
 
 RUN apt-get update && apt-get install -y \
         python3-pip \
