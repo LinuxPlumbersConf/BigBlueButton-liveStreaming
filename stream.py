@@ -128,7 +128,7 @@ def stream():
     audio_options = '-f pulse -i default -ac 2 -c:a aac -b:a 160k -ar 48000'
     #video_options = ' -c:v libvpx-vp9 -b:v 2000k -crf 33 -quality realtime -speed 5'
     video_options = '-c:v libx264 -x264-params "nal-hrd=cbr" -profile:v high -level:v 4.2 -vf format=yuv420p -b:v 4500k -maxrate 6000k -minrate 3000k -bufsize 12000k -g 60 -preset ultrafast -tune zerolatency'
-    ffmpeg_stream = 'ffmpeg -loglevel verbose -thread_queue_size 2048 -f x11grab -probesize 10M -draw_mouse 0 -framerate 30 -vsync 1 -s 1920x1080 -i :%d -thread_queue_size 2048 %s -threads 0 %s -f flv -flvflags no_duration_filesize "%s"' % ( 122, audio_options, video_options, args.target)
+    ffmpeg_stream = 'ffmpeg -loglevel warning -thread_queue_size 2048 -f x11grab -probesize 10M -draw_mouse 0 -framerate 30 -vsync 1 -s 1920x1080 -i :%d -thread_queue_size 2048 %s -threads 0 %s -f flv -flvflags no_duration_filesize "%s"' % ( 122, audio_options, video_options, args.target)
     ffmpeg_args = shlex.split(ffmpeg_stream)
     logging.info("streaming meeting...")
     p = subprocess.call(ffmpeg_args)
