@@ -16,7 +16,7 @@ services:
     build: .
     container_name: lpc2020streamercontainer
     environment:
-      - BBB_URL=https://$2.2020.linuxplumbersconf.org/bigbluebutton/api
+      - BBB_URL=https://$2.lpc.events/bigbluebutton/api
       - BBB_SECRET=$3
       - BBB_MEETING_ID=$4
       - BBB_USER_NAME=YouTube Live
