@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env pythn
 # -*- coding: utf-8 -*-
 
 import sys, argparse, time, subprocess, shlex, logging, os
@@ -73,7 +73,7 @@ def bbb_browser():
     browser.get(get_join_url())
     element = EC.presence_of_element_located((By.CSS_SELECTOR, '[aria-label="Listen only"]'))
     WebDriverWait(browser, selelnium_timeout).until(element)
-    browser.find_elements_by_css_selector('[aria-label="Listen only"]')[0].click()
+    browser.find_element('css selector', '[aria-label="Listen only"]').click()
 
     element = EC.invisibility_of_element((By.CSS_SELECTOR, '.ReactModal__Overlay'))
     WebDriverWait(browser, selelnium_timeout).until(element)
@@ -88,15 +88,21 @@ def bbb_browser():
 #        browser.find_elements_by_id('chat-toggle-button')[0].click()
 #        browser.find_elements_by_css_selector('button[aria-label="Users and messages toggle"]')[0].click()
 
-    browser.find_elements_by_id('matrix-toggle-button')[0].click()
-    browser.execute_script("document.querySelector('[aria-label=\"User list\"]').parentElement.style.display='none';")
+#    No Matrix integration available in current LPC2022 setup
+#    browser.find_element('id', 'matrix-toggle-button')[0].click()
+#    browser.execute_script("document.querySelector('[aria-label=\"User list\"]').parentElement.style.display='none';")
+
 #   TODO: can we also hide the '.composer-panel' in the riot-embedded iframe as well?
 
-    browser.execute_script("document.querySelector('header').style.display='none';")
-    browser.execute_script("document.querySelector('[aria-label=\"Users and messages toggle\"]').style.display='none';")
-    browser.execute_script("document.querySelector('[aria-label=\"Options\"]').style.display='none';")
+    browser.execute_script("document.querySelector('header[data-test=\"chatTitle\"]').style.display='none';")
+    browser.execute_script("document.querySelector('div#layout header:not([data-test])').style.display='none';")
+    browser.execute_script("document.querySelector('button[data-test=\"whiteboardOptionsButton\"]').style.display='none';")
+    browser.execute_script("document.querySelector('button[data-test=\"Manage users\"]').style.display='none';")
+
+
+#    Commented out to allow the Public chat to show for LPC2022 (for now)
+#    browser.execute_script("document.querySelector('[aria-label=\"Users and messages toggle\"]').style.display='none';")
     browser.execute_script("document.querySelector('[aria-label=\"Actions bar\"]').style.display='none';")
-    browser.execute_script("document.getElementById('container').setAttribute('style','margin-bottom:30px');")
 
 def create_meeting():
     create_params = {}
